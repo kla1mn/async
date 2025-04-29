@@ -13,7 +13,7 @@ async function run() {
         const requisites = await sendRequest(`${API.orgReqs}?ogrn=${ogrns}`);
         const orgsMap = reqsToMap(requisites);
 
-        const analytics = await sendRequest(`${API.analitics}?ogrn=${ogrns}`);
+        const analytics = await sendRequest(`${API.analytics}?ogrn=${ogrns}`);
         addInOrgsMap(orgsMap, analytics, "analytics");
 
         const buh = await sendRequest(`${API.buhForms}?ogrn=${ogrns}`);
