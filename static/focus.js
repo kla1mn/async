@@ -13,7 +13,7 @@ async function run() {
         const requisites = await sendRequest(`${API.orgReqs}?ogrn=${ogrns}`);
         const orgsMap = reqsToMap(requisites);
 
-        const analytics = await sendRequest(`${API.analytics}?ogrn=${ogrns}`);
+        const analytics = await sendRequest(`${API.analitics}?ogrn=${ogrns}`);
         addInOrgsMap(orgsMap, analytics, "analytics");
 
         const buh = await sendRequest(`${API.buhForms}?ogrn=${ogrns}`);
@@ -51,8 +51,10 @@ run();
 function sendRequest(url) {
     return fetch(url)
         .then(response => {
+            console.log('Response object:', response);
             if (!response.ok) {
-                throw new Error(`Request failed with status ${response.status}`);
+                alert(`Ошибка запроса: ${response.status} ${response.statusText}`);
+                return Promise.reject(new Error(`Status ${response.status}`));
             }
             return response.json();
         });
